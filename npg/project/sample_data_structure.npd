@@ -1,0 +1,8 @@
+ 1 linked-list 5 
+ 2 sequential-list 3 
+ 3 stack 8 linked-list
+ 4 queue 2 linked-list,stack
+ 5 string 7 sequential-list,queue
+ 6 array 4 queue
+ 7 tree 9 linked-list,array
+ 8 graph 6 tree

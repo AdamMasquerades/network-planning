@@ -1,0 +1,8 @@
+*.gv
+*.make
+*.obj
+*.gch
+*.npdb
+aov.gv.png
+aov.gv.pdf
+aov.gv.svg

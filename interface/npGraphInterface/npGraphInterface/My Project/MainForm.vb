@@ -421,7 +421,7 @@ Public Class MainForm
     End Sub
 
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
-        MsgBox("Network Planning" + vbCrLf + "version 1.0.1", Title:="About Network Planning")
+        System.Diagnostics.Process.Start("https://github.com/AdamMasquerades/network-planning/blob/master/README.md")
     End Sub
 
     Private Sub MainForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing

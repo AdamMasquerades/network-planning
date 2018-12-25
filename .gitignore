@@ -5,4 +5,8 @@
 *.npdb
 aov.gv.png
 aov.gv.pdf
-aov.gv.svg
+
+.vs/
+bin/
+Connected Services/
+obj/

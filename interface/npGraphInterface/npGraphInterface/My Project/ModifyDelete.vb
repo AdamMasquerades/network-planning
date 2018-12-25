@@ -189,7 +189,10 @@ Public Class ModifyDelete
                     MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
                 End If
-
+                If TextBoxAddName.Text = "START" Or TextBoxAddName.Text = "END" Or TextBoxAddName.Text = "Undefined" Then
+                    MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
+                    Return
+                End If
                 TextBoxAddName.Text = Trim(TextBoxAddName.Text)
                 While (TextBoxAddName.Text.Contains("  "))
                     TextBoxAddName.Text = TextBoxAddName.Text.Replace("  ", " ")
@@ -300,7 +303,10 @@ Public Class ModifyDelete
                     MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
                 End If
-
+                If TextBoxModifyName.Text = "START" Or TextBoxModifyName.Text = "END" Or TextBoxModifyName.Text = "Undefined" Then
+                    MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
+                    Return
+                End If
                 TextBoxModifyName.Text = Trim(TextBoxModifyName.Text)
                 While (TextBoxModifyName.Text.Contains("  "))
                     TextBoxModifyName.Text = TextBoxModifyName.Text.Replace("  ", " ")

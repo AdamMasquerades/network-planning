@@ -31,6 +31,10 @@ Public Class ReadIn
             MsgBox("Invalid item name. Item name cannot contain commas(,).", MsgBoxStyle.Exclamation, Title:="WARNING")
             Return
         End If
+        If TextBoxName.Text = "START" Or TextBoxName.Text = "END" Or TextBoxName.Text = "Undefined" Then
+            MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
+            Return
+        End If
         If currentItemNumber > 0 Then
             For i = 1 To currentItemNumber
                 If TextBoxName.Text = itemName(i) Then

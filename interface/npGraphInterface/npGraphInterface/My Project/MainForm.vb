@@ -4,151 +4,6 @@ Imports System.IO
 Imports System.Text
 Imports System.ComponentModel
 
-Module GlobalVariables
-    Public currentItemNumber As Integer
-    Public curFileName As String
-    Public itemId(10000) As String
-    Public itemName(10000) As String
-    Public itemDuration(10000) As String
-    Public itemPrereq(10000) As String
-    Public wmTickTimes As Integer
-
-    Public queryItemNumber As Integer = 0
-    Public queryId(10000) As String
-    Public queryName(10000) As String
-    Public queryDuration(10000) As String
-    Public queryPrereq(10000) As String
-    Public wmWaitForQuery As Boolean = False
-    Public wmTimeLimit As Integer = 50
-
-    Public fileName_NewDefault As String = "new_project"
-
-    'Paths
-    Public initialDirectory As String = Application.StartupPath + "\project"
-    Public filePath_DrawGraph As String = Application.StartupPath + "\npgraph"
-    Public filePath_npdb As String = Application.StartupPath + "\query"
-
-    'DRAW GRAPH: npgraph: indespensible files
-    Public fileName_DrawGraphExe As String = filePath_DrawGraph + "\npgraph.exe"
-    Public fileName_DrawGraphPython As String = filePath_DrawGraph + "\draw_aov.py"
-    Public fileName_DrawGraphBat As String = filePath_DrawGraph + "\npgraph.bat"
-
-    'SEARCH: query: indespensible files
-    Public fileName_dbExe As String = filePath_npdb + "\database.exe"
-    Public fileName_dbQueryBat As String = filePath_npdb + "\database.bat"
-
-    'DRAW GRAPH: npgraph: temporary data files
-    Public fileName_fileName As String = filePath_DrawGraph + "\fileName"
-
-    'SEARCH: query: temporary data files
-    Public fileName_npdb As String = filePath_npdb + "\npdatabase.npdb"
-    Public fileName_dbQuery As String = filePath_npdb + "\dbquery.npdb"
-    Public fileName_QueryHtml As String = filePath_npdb + "\queryresults.html"
-    Public fileName_QuerySuccess As String = filePath_npdb + "\QuerySuccess"
-
-    Public Sub LoadCurrentHtml(webBrowser As WebBrowser)
-        Dim queryHtml As New StreamWriter(fileName_QueryHtml, False, Encoding.UTF8)
-        queryHtml.Write("<style>" + vbCrLf)
-        queryHtml.Write("table tr td{border-width: 1px;border-style: solid;border-color:gainsboro;}" + vbCrLf)
-        queryHtml.Write("table{width: 100%;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align:center;border-collapse: collapse;}" + vbCrLf)
-        queryHtml.Write("</style>" + vbCrLf)
-        queryHtml.Write("<table><tr><td> ID </td><td> Name </td><td> Duration </td><td> Prerequisite(s) </td></tr>" + vbCrLf)
-        For i = 1 To currentItemNumber
-            queryHtml.Write("<tr>" + vbCrLf)
-            queryHtml.Write("<td>" + itemId(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + itemName(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + itemDuration(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + itemPrereq(i) + "</td>" + vbCrLf)
-            queryHtml.Write("</tr>" + vbCrLf)
-        Next
-        If currentItemNumber = 0 Then
-            queryHtml.Write("<tr><td colspan=""4"">(Empty)</td></tr>")
-        End If
-        queryHtml.Write("</table>")
-        queryHtml.Close()
-        webBrowser.Url = New Uri(fileName_QueryHtml)
-    End Sub
-
-    Public Sub LoadQueryResultsHtml(webBrowser As WebBrowser)
-        Dim dbQuery As New StreamReader(fileName_dbQuery, Encoding.UTF8)
-        Dim readBufferString As String
-        Dim readBufferChar() As String
-        queryItemNumber = 0
-        readBufferString = ""
-        While (True)
-            readBufferString = dbQuery.ReadLine()
-            If readBufferString = "" Then
-                Exit While
-            Else
-                queryItemNumber = queryItemNumber + 1
-                readBufferChar = Split(readBufferString, vbTab)
-                queryId(queryItemNumber) = Trim(readBufferChar(0))
-                queryName(queryItemNumber) = Trim(readBufferChar(1))
-                queryDuration(queryItemNumber) = Trim(readBufferChar(2))
-                queryPrereq(queryItemNumber) = Trim(readBufferChar(3))
-                queryPrereq(queryItemNumber) = queryPrereq(queryItemNumber).Replace(",", ", ")
-            End If
-        End While
-        dbQuery.Close()
-
-        Dim queryHtml As New StreamWriter(fileName_QueryHtml, False, Encoding.UTF8)
-        queryHtml.Write("<style>" + vbCrLf)
-        queryHtml.Write("table tr td{border-width: 1px;border-style: solid;border-color:gainsboro;}" + vbCrLf)
-        queryHtml.Write("table{width: 100%;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align:center;border-collapse: collapse;}" + vbCrLf)
-        queryHtml.Write("</style>" + vbCrLf)
-        queryHtml.Write("<table><tr><td> ID </td><td> Name </td><td> Duration </td><td> Prerequisite(s) </td></tr>" + vbCrLf)
-        For i = 1 To queryItemNumber
-            queryHtml.Write("<tr>" + vbCrLf)
-            queryHtml.Write("<td>" + queryId(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + queryName(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + queryDuration(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + queryPrereq(i) + "</td>" + vbCrLf)
-            queryHtml.Write("</tr>" + vbCrLf)
-        Next
-        If queryItemNumber = 0 Then
-            queryHtml.Write("<tr><td colspan=""4"">(No Results)</td></tr>")
-        End If
-        queryHtml.Write("</table>")
-        queryHtml.Close()
-        webBrowser.Url = New Uri(fileName_QueryHtml)
-    End Sub
-
-    Public Sub ShowWaitMsg(Optional interval As Integer = 25, Optional waitForQuery As Boolean = False)
-        Dim wm As New WaitMsg
-        wm.Timer1.Interval = interval
-        wmWaitForQuery = waitForQuery
-        wm.ShowDialog()
-    End Sub
-
-    Public Sub SaveNpd()
-        If currentItemNumber = 0 Then
-            Return
-        Else
-            Dim npd As New StreamWriter(curFileName, False, Encoding.ASCII)
-            Dim i As Integer
-            For i = 1 To currentItemNumber
-                npd.Write(" " + itemId(i) + " " + itemName(i) + " " + itemDuration(i) + " " + itemPrereq(i).Replace(", ", ","))
-                If i <> currentItemNumber Then npd.Write(vbCrLf)
-            Next
-            npd.Close()
-        End If
-    End Sub
-
-    Public Sub SaveNpdb()
-        Dim npdb As New StreamWriter(fileName_npdb, False, Encoding.UTF8)
-        For i = 1 To currentItemNumber
-            If Trim(itemPrereq(i)) = "" Then
-                npdb.Write(" " + itemId(i) + vbTab + itemName(i) + vbTab + itemDuration(i) + vbTab + " ")
-            Else
-                npdb.Write(" " + itemId(i) + vbTab + itemName(i) + vbTab + itemDuration(i) + vbTab + itemPrereq(i).Replace(", ", ","))
-            End If
-            If i <> currentItemNumber Then npdb.Write(vbCrLf)
-        Next
-        npdb.Close()
-    End Sub
-
-End Module
-
 Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -307,6 +162,7 @@ Public Class MainForm
         Try
             While (True)
                 readBufferString = txtfileforcpp.ReadLine()
+
                 If readBufferString = "" Then
                     Exit While
                 Else
@@ -316,47 +172,12 @@ Public Class MainForm
                     itemName(currentItemNumber) = Trim(readBufferChar(2))
                     itemDuration(currentItemNumber) = Trim(readBufferChar(3))
                     itemPrereq(currentItemNumber) = Trim(readBufferChar(4))
-                    If IsNumeric(itemId(currentItemNumber)) = False Or IsNumeric(itemDuration(currentItemNumber)) = False Then
-                        Throw New Exception
-                    End If
-                    If itemName(currentItemNumber) = "" Or itemName(currentItemNumber).Contains(",") Then
-                        Throw New Exception
-                    End If
-                    If itemDuration(currentItemNumber).Contains(".") Or itemDuration(currentItemNumber).Contains(",") Then
-                        Throw New Exception
-                    End If
-                    If readBufferString.Contains(", ") Or readBufferString.Contains(", ") Then
-                        Throw New Exception
-                    End If
-
-                    If itemPrereq(currentItemNumber) <> "" Then
-                        Dim prereqArray() As String
-                        Dim prereqNumber, prereqInNames As Integer
-                        Dim prereq As String
-                        prereq = itemPrereq(currentItemNumber)
-                        prereqArray = Split(prereq, ",")
-                        prereqNumber = 1
-
-                        For i = 0 To prereq.Length - 1
-                            If prereq.Substring(i, 1) = "," Then prereqNumber = prereqNumber + 1
-                        Next
-
-                        For i = 0 To prereqNumber - 1
-                            prereqInNames = 0
-                            For j = 1 To currentItemNumber - 1
-                                If prereqArray(i) = itemName(j) Then prereqInNames = 1
-                            Next
-                            For j = 0 To i - 1
-                                If prereqArray(i) = prereqArray(j) Then prereqInNames = 0
-                            Next
-                            If prereqInNames = 0 Then
-                                Throw New Exception
-                            End If
-                        Next
-                    End If
-
+                    'MsgBox(itemId(currentItemNumber) + itemName(currentItemNumber) + itemDuration(currentItemNumber) + itemPrereq(currentItemNumber))
+                    If readBufferString.Contains(", ") Or readBufferString.Contains(", ") Then Throw New Exception
+                    If NameCheck(itemName(currentItemNumber), range:=currentItemNumber - 1) <> "OK" Then Throw New Exception
+                    If DurationCheck(itemDuration(currentItemNumber)) <> "OK" Then Throw New Exception
                     itemPrereq(currentItemNumber) = itemPrereq(currentItemNumber).Replace(",", ", ")
-
+                    If PrerequisiteCheck(itemPrereq(currentItemNumber), currentItemNumber - 1) <> "OK" Then Throw New Exception
                 End If
             End While
         Catch

@@ -1,7 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.IO
-Imports System.Text
-Imports System.Windows.Forms
 Imports System.Drawing
 
 Public Class ModifyDelete
@@ -181,93 +178,28 @@ Public Class ModifyDelete
 
         Select Case ComboBoxFunction.SelectedItem
             Case "Add"
-                Dim prereq As String
-                Dim prereqArray() As String
-                Dim prereqNumber, prereqInNames As Integer
-                Dim i, j As Integer
-                If TextBoxAddName.Text = "" Or TextBoxAddName.Text = " Name" Then
-                    MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                If TextBoxAddName.Text = "START" Or TextBoxAddName.Text = "END" Or TextBoxAddName.Text = "Undefined" Then
-                    MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                TextBoxAddName.Text = Trim(TextBoxAddName.Text)
-                While (TextBoxAddName.Text.Contains("  "))
-                    TextBoxAddName.Text = TextBoxAddName.Text.Replace("  ", " ")
-                End While
-                TextBoxAddName.Text = TextBoxAddName.Text.Replace(" ", "-")
 
-                If TextBoxAddName.Text.Contains(",") Then
-                    MsgBox("Invalid item name. Item name cannot contain commas(,).", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                If currentItemNumber > 0 Then
-                    For i = 1 To currentItemNumber
-                        If TextBoxAddName.Text = itemName(i) Then
-                            MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                            Return
-                        End If
-                    Next
-                End If
-                If TextBoxAddDuration.Text = "" Or IsNumeric(TextBoxAddDuration.Text) = False Or Val(TextBoxAddDuration.Text) < 0 Then
-                    MsgBox("Invalid item duration.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                If TextBoxAddDuration.Text.Contains(".") Or TextBoxAddDuration.Text.Contains(",") Then
-                    MsgBox("Invalid item duration. Durations must be integers.", MsgBoxStyle.Exclamation, Title:="WARNING")
+                Dim checkResult As String
+
+                NameRegularize(TextBoxAddName.Text)
+                checkResult = NameCheck(TextBoxAddName.Text)
+                If checkResult <> "OK" Then
+                    MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
                 End If
 
-                If TextBoxAddPrereq.Text <> "" Then
-                    prereq = TextBoxAddPrereq.Text             'Regualarize prereq to "One, Two, One-hundred"
-                    prereq = Trim(prereq)
-                    While (prereq.Substring(0, 1) = ",")
-                        prereq = prereq.Substring(1, prereq.Length - 1)
-                    End While
-                    prereq = Trim(prereq)
-                    While (prereq.Substring(prereq.Length - 1, 1) = ",")
-                        prereq = prereq.Substring(0, prereq.Length - 1)
-                    End While
-                    While (prereq.Contains("  "))
-                        prereq = prereq.Replace("  ", " ")
-                    End While
-                    While (prereq.Contains(",,"))
-                        prereq = prereq.Replace(",,", ",")
-                    End While
-                    While (prereq.Contains(", "))
-                        prereq = prereq.Replace(", ", ",")
-                    End While
-                    While (prereq.Contains(" ,"))
-                        prereq = prereq.Replace(" ,", ",")
-                    End While
-                    prereq = prereq.Replace(" ", "-")
-                    prereq = prereq.Replace(",", ", ")
-
-                    prereqArray = Split(prereq, ", ")
-                    prereqNumber = 1
-                    For i = 0 To prereq.Length - 1
-                        If prereq.Substring(i, 1) = "," Then prereqNumber = prereqNumber + 1
-                    Next
-
-                    For i = 0 To prereqNumber - 1
-                        prereqInNames = 0
-                        For j = 1 To currentItemNumber
-                            If prereqArray(i) = itemName(j) Then prereqInNames = 1
-                        Next
-                        For j = 0 To i - 1
-                            If prereqArray(i) = prereqArray(j) Then prereqInNames = 0
-                        Next
-                        If prereqInNames = 0 Then
-                            MsgBox("Invalid Prerequisite(s).", MsgBoxStyle.Exclamation, Title:="WARNING")
-                            Return
-                        End If
-                    Next
-
-                    TextBoxAddPrereq.Text = prereq
+                checkResult = DurationCheck(TextBoxAddDuration.Text)
+                If checkResult <> "OK" Then
+                    MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
+                    Return
                 End If
 
+                PrerequisiteRegularize(TextBoxAddPrereq.Text)
+                checkResult = PrerequisiteCheck(TextBoxAddPrereq.Text, currentItemNumber)
+                If checkResult <> "OK" Then
+                    MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
+                    Return
+                End If
 
                 currentItemNumber += 1
                 itemId(currentItemNumber) = Trim(Str(currentItemNumber))
@@ -289,97 +221,33 @@ Public Class ModifyDelete
 
                 LoadCurrentHtml(WebBrowserQueryResults)
 
-
             Case "Modify"
+
+                Dim checkResult As String
+
                 If IsNumeric(TextBoxID.Text) = False Or TextBoxID.Text.Contains(".") Or Val(TextBoxID.Text) > currentItemNumber Or Val(TextBoxID.Text) <= 0 Then
                     MsgBox("Invalid ID", MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
                 End If
-                Dim prereq As String
-                Dim prereqArray() As String
-                Dim prereqNumber, prereqInNames As Integer
-                Dim i, j As Integer
-                If TextBoxModifyName.Text = "" Or TextBoxModifyName.Text = " Name" Then
-                    MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                If TextBoxModifyName.Text = "START" Or TextBoxModifyName.Text = "END" Or TextBoxModifyName.Text = "Undefined" Then
-                    MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                TextBoxModifyName.Text = Trim(TextBoxModifyName.Text)
-                While (TextBoxModifyName.Text.Contains("  "))
-                    TextBoxModifyName.Text = TextBoxModifyName.Text.Replace("  ", " ")
-                End While
-                TextBoxModifyName.Text = TextBoxModifyName.Text.Replace(" ", "-")
 
-                If TextBoxModifyName.Text.Contains(",") Then
-                    MsgBox("Invalid item name. Item name cannot contain commas(,).", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                If currentItemNumber > 0 Then
-                    For i = 1 To currentItemNumber
-                        If TextBoxModifyName.Text = itemName(i) And i <> Val(TextBoxID.Text) Then
-                            MsgBox("Invalid item name.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                            Return
-                        End If
-                    Next
-                End If
-                If TextBoxModifyDuration.Text = "" Or IsNumeric(TextBoxModifyDuration.Text) = False Or Val(TextBoxAddDuration.Text) < 0 Then
-                    MsgBox("Invalid item duration.", MsgBoxStyle.Exclamation, Title:="WARNING")
-                    Return
-                End If
-                If TextBoxModifyDuration.Text.Contains(".") Or TextBoxModifyDuration.Text.Contains(",") Then
-                    MsgBox("Invalid item duration. Durations must be integers.", MsgBoxStyle.Exclamation, Title:="WARNING")
+                NameRegularize(TextBoxAddName.Text)
+                checkResult = NameCheck(TextBoxAddName.Text, Val(TextBoxID.Text))
+                If checkResult <> "OK" Then
+                    MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
                 End If
 
-                If TextBoxModifyPrereq.Text <> "" Then
-                    prereq = TextBoxModifyPrereq.Text             'Regualarize prereq to "One, Two, One-hundred"
-                    prereq = Trim(prereq)
-                    While (prereq.Substring(0, 1) = ",")
-                        prereq = prereq.Substring(1, prereq.Length - 1)
-                    End While
-                    prereq = Trim(prereq)
-                    While (prereq.Substring(prereq.Length - 1, 1) = ",")
-                        prereq = prereq.Substring(0, prereq.Length - 1)
-                    End While
-                    While (prereq.Contains("  "))
-                        prereq = prereq.Replace("  ", " ")
-                    End While
-                    While (prereq.Contains(",,"))
-                        prereq = prereq.Replace(",,", ",")
-                    End While
-                    While (prereq.Contains(", "))
-                        prereq = prereq.Replace(", ", ",")
-                    End While
-                    While (prereq.Contains(" ,"))
-                        prereq = prereq.Replace(" ,", ",")
-                    End While
-                    prereq = prereq.Replace(" ", "-")
-                    prereq = prereq.Replace(",", ", ")
+                checkResult = DurationCheck(TextBoxAddDuration.Text)
+                If checkResult <> "OK" Then
+                    MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
+                    Return
+                End If
 
-                    prereqArray = Split(prereq, ", ")
-                    prereqNumber = 1
-                    For i = 0 To prereq.Length - 1
-                        If prereq.Substring(i, 1) = "," Then prereqNumber = prereqNumber + 1
-                    Next
-
-                    For i = 0 To prereqNumber - 1
-                        prereqInNames = 0
-                        For j = 1 To Val(TextBoxID.Text) - 1
-                            If prereqArray(i) = itemName(j) Then prereqInNames = 1
-                        Next
-                        For j = 0 To i - 1
-                            If prereqArray(i) = prereqArray(j) Then prereqInNames = 0
-                        Next
-                        If prereqInNames = 0 Then
-                            MsgBox("Invalid Prerequisite(s).", MsgBoxStyle.Exclamation, Title:="WARNING")
-                            Return
-                        End If
-                    Next
-
-                    TextBoxModifyPrereq.Text = prereq
+                PrerequisiteRegularize(TextBoxModifyPrereq.Text)
+                checkResult = PrerequisiteCheck(TextBoxModifyPrereq.Text, Val(TextBoxID.Text) - 1)
+                If checkResult <> "OK" Then
+                    MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
+                    Return
                 End If
 
 
@@ -422,16 +290,22 @@ Public Class ModifyDelete
 
     Private Sub TextBoxID_TextChanged(sender As Object, e As EventArgs) Handles TextBoxID.TextChanged
         If Val(TextBoxID.Text) > 0 And Val(TextBoxID.Text) <= currentItemNumber And ComboBoxFunction.SelectedItem = "Modify" Then
-            TextBoxModifyName.Text = itemName(Val(TextBoxID.Text))
-            TextBoxModifyDuration.Text = itemDuration(Val(TextBoxID.Text))
-            TextBoxModifyPrereq.Text = itemPrereq(Val(TextBoxID.Text))
             TextBoxModifyName.ForeColor = Color.Black
             TextBoxModifyDuration.ForeColor = Color.Black
             TextBoxModifyPrereq.ForeColor = Color.Black
+            textBoxModifyNameInitialized = 1
+            textBoxModifyDurationInitialized = 1
+            textBoxModifyPrereqInitialized = 1
+            TextBoxModifyName.Text = itemName(Val(TextBoxID.Text))
+            TextBoxModifyDuration.Text = itemDuration(Val(TextBoxID.Text))
+            TextBoxModifyPrereq.Text = itemPrereq(Val(TextBoxID.Text))
         Else
             TextBoxModifyName.Text = ""
             TextBoxModifyDuration.Text = ""
             TextBoxModifyPrereq.Text = ""
+            textBoxModifyNameInitialized = 0
+            textBoxModifyDurationInitialized = 0
+            textBoxModifyPrereqInitialized = 0
         End If
     End Sub
 End Class

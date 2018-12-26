@@ -67,6 +67,7 @@
     <Content Include="npgraph.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="My Project\GlobalDefinitions.vb" />
     <Compile Include="My Project\MainForm.Designer.vb">
       <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>

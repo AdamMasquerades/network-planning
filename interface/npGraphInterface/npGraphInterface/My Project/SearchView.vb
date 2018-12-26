@@ -1,7 +1,5 @@
 ﻿Imports System.IO
 Imports System.Text
-Imports System.Windows.Forms
-Imports System
 Imports System.ComponentModel
 
 Public Class SearchView
@@ -178,6 +176,12 @@ Public Class SearchView
         End Select
 
         If ComboBoxItem.SelectedItem <> "All" Then
+
+            Dim checkResult As String = ConditionCheck(TextBoxCondition.Text)
+            If checkResult <> "OK" Then
+                MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
+                Return
+            End If
             Select Case ComboBoxCondition.SelectedItem
                 Case "equals"
                     sqlCommand = sqlCommand + " = '" + TextBoxCondition.Text + "'"

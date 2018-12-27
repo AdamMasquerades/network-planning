@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports System.IO
 Imports System.Text
+Imports System.Threading
 
 Module GlobalDefinitions
 
@@ -262,4 +263,16 @@ Module GlobalDefinitions
 
     End Function
 
+    Sub main()
+        Dim onlyInstance As Boolean = False
+        Dim Mutex = New Mutex(True, "UniqueApplicationName", onlyInstance)
+        If onlyInstance = False Then
+            MsgBox("Another 'Network Planning' application is running currently.", MsgBoxStyle.Critical, "FATAL ERROR")
+            Return
+        End If
+        Application.Run(New MainForm)
+        GC.KeepAlive(Mutex)
+    End Sub
+
 End Module
+

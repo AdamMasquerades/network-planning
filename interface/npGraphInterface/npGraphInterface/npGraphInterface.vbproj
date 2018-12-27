@@ -50,7 +50,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>npGraphInterface.MainForm</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>npgraph.ico</ApplicationIcon>

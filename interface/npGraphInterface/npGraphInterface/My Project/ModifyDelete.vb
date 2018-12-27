@@ -98,7 +98,6 @@ Public Class ModifyDelete
         Dim postPrereqNumber As Integer
         Dim j, k As Integer
 
-
         For j = idVal + 1 To currentItemNumber
             postPrereqArray = Split(itemPrereq(j), ",")         'note that the separator is ONLY A SINGLE comma.
             postPrereqNumber = 1
@@ -261,6 +260,34 @@ Public Class ModifyDelete
                 If checkResult <> "OK" Then
                     MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
+                End If
+
+                Dim idVal = Val(TextBoxID.Text)
+                If TextBoxModifyName.Text <> itemName(idVal) Then
+                    Dim postPrereqArray() As String
+                    Dim postPrereqNumber As Integer
+                    Dim j, k As Integer
+
+                    For j = idVal + 1 To currentItemNumber
+                        postPrereqArray = Split(itemPrereq(j), ",")         'note that the separator is ONLY A SINGLE comma.
+                        postPrereqNumber = 1
+                        For k = 0 To itemPrereq(j).Length - 1
+                            If itemPrereq(j).Substring(k, 1) = "," Then postPrereqNumber = postPrereqNumber + 1
+                        Next
+                        For k = 0 To postPrereqNumber - 1
+                            If itemName(idVal) = postPrereqArray(k) Then
+                                If itemPrereq(j).Contains("," + itemName(idVal) + ",") Then
+                                    itemPrereq(j) = itemPrereq(j).Replace("," + itemName(idVal) + ",", "," + TextBoxModifyName.Text + ",")
+                                Else
+                                    itemPrereq(j) = itemPrereq(j).Replace("," + itemName(idVal), "," + TextBoxModifyName.Text)
+                                    itemPrereq(j) = itemPrereq(j).Replace(itemName(idVal) + ",", TextBoxModifyName.Text + ",")
+                                    If itemPrereq(j) = itemName(idVal) Then
+                                        itemPrereq(j) = TextBoxModifyName.Text
+                                    End If
+                                End If
+                            End If
+                        Next
+                    Next
                 End If
 
                 checkResult = DurationCheck(TextBoxModifyDuration.Text)

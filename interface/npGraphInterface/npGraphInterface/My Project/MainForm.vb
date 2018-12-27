@@ -93,6 +93,7 @@ Public Class MainForm
     Private Sub ButtonModifyDelete_Click(sender As Object, e As EventArgs) Handles ButtonModifyDelete.Click
         Dim md As New ModifyDelete
         md.ShowDialog()
+        If currentItemNumber <> 0 Then ButtonReadIn.Enabled = False
     End Sub
 
     Private Sub ButtonDrawGraph_Click(sender As Object, e As EventArgs) Handles ButtonDrawGraph.Click

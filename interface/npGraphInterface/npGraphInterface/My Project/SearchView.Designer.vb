@@ -37,11 +37,11 @@ Partial Class SearchView
         'WebBrowserQueryResults
         '
         Me.WebBrowserQueryResults.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.WebBrowserQueryResults.Location = New System.Drawing.Point(0, 73)
+        Me.WebBrowserQueryResults.Location = New System.Drawing.Point(0, 99)
         Me.WebBrowserQueryResults.Margin = New System.Windows.Forms.Padding(0)
         Me.WebBrowserQueryResults.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowserQueryResults.Name = "WebBrowserQueryResults"
-        Me.WebBrowserQueryResults.Size = New System.Drawing.Size(1082, 512)
+        Me.WebBrowserQueryResults.Size = New System.Drawing.Size(1232, 654)
         Me.WebBrowserQueryResults.TabIndex = 0
         '
         'PanelQuery
@@ -57,7 +57,7 @@ Partial Class SearchView
         Me.PanelQuery.Location = New System.Drawing.Point(0, 0)
         Me.PanelQuery.Margin = New System.Windows.Forms.Padding(0)
         Me.PanelQuery.Name = "PanelQuery"
-        Me.PanelQuery.Size = New System.Drawing.Size(1082, 53)
+        Me.PanelQuery.Size = New System.Drawing.Size(1232, 53)
         Me.PanelQuery.TabIndex = 1
         '
         'ButtonOrder
@@ -69,9 +69,9 @@ Partial Class SearchView
         Me.ButtonOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ButtonOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ButtonOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonOrder.Font = New System.Drawing.Font("Segoe UI", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonOrder.Font = New System.Drawing.Font("Segoe UI", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonOrder.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonOrder.Location = New System.Drawing.Point(942, -1)
+        Me.ButtonOrder.Location = New System.Drawing.Point(1033, 2)
         Me.ButtonOrder.Name = "ButtonOrder"
         Me.ButtonOrder.Size = New System.Drawing.Size(37, 33)
         Me.ButtonOrder.TabIndex = 5
@@ -86,9 +86,9 @@ Partial Class SearchView
         Me.ComboBoxOrderBy.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxOrderBy.FormattingEnabled = True
         Me.ComboBoxOrderBy.Items.AddRange(New Object() {"<sort by>", "ID", "Name", "Duration"})
-        Me.ComboBoxOrderBy.Location = New System.Drawing.Point(801, 2)
+        Me.ComboBoxOrderBy.Location = New System.Drawing.Point(894, 2)
         Me.ComboBoxOrderBy.Name = "ComboBoxOrderBy"
-        Me.ComboBoxOrderBy.Size = New System.Drawing.Size(135, 31)
+        Me.ComboBoxOrderBy.Size = New System.Drawing.Size(136, 31)
         Me.ComboBoxOrderBy.TabIndex = 4
         '
         'TextBoxCondition
@@ -96,10 +96,10 @@ Partial Class SearchView
         Me.TextBoxCondition.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TextBoxCondition.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBoxCondition.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxCondition.Location = New System.Drawing.Point(308, 6)
+        Me.TextBoxCondition.Location = New System.Drawing.Point(377, 6)
         Me.TextBoxCondition.Margin = New System.Windows.Forms.Padding(6)
         Me.TextBoxCondition.Name = "TextBoxCondition"
-        Me.TextBoxCondition.Size = New System.Drawing.Size(484, 27)
+        Me.TextBoxCondition.Size = New System.Drawing.Size(508, 27)
         Me.TextBoxCondition.TabIndex = 3
         '
         'ComboBoxCondition
@@ -109,9 +109,9 @@ Partial Class SearchView
         Me.ComboBoxCondition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBoxCondition.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxCondition.FormattingEnabled = True
-        Me.ComboBoxCondition.Location = New System.Drawing.Point(165, 2)
+        Me.ComboBoxCondition.Location = New System.Drawing.Point(197, 2)
         Me.ComboBoxCondition.Name = "ComboBoxCondition"
-        Me.ComboBoxCondition.Size = New System.Drawing.Size(134, 31)
+        Me.ComboBoxCondition.Size = New System.Drawing.Size(171, 31)
         Me.ComboBoxCondition.TabIndex = 2
         '
         'ComboBoxItem
@@ -125,7 +125,7 @@ Partial Class SearchView
         Me.ComboBoxItem.Location = New System.Drawing.Point(9, 2)
         Me.ComboBoxItem.Margin = New System.Windows.Forms.Padding(1)
         Me.ComboBoxItem.Name = "ComboBoxItem"
-        Me.ComboBoxItem.Size = New System.Drawing.Size(152, 31)
+        Me.ComboBoxItem.Size = New System.Drawing.Size(184, 31)
         Me.ComboBoxItem.TabIndex = 1
         '
         'ButtonOK
@@ -137,9 +137,9 @@ Partial Class SearchView
         Me.ButtonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonOK.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonOK.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonOK.Location = New System.Drawing.Point(998, 2)
+        Me.ButtonOK.Location = New System.Drawing.Point(1141, 2)
         Me.ButtonOK.Name = "ButtonOK"
-        Me.ButtonOK.Size = New System.Drawing.Size(81, 31)
+        Me.ButtonOK.Size = New System.Drawing.Size(88, 31)
         Me.ButtonOK.TabIndex = 0
         Me.ButtonOK.Text = "OK"
         Me.ButtonOK.UseVisualStyleBackColor = False
@@ -149,12 +149,12 @@ Partial Class SearchView
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.ClientSize = New System.Drawing.Size(1082, 585)
+        Me.ClientSize = New System.Drawing.Size(1232, 753)
         Me.Controls.Add(Me.PanelQuery)
         Me.Controls.Add(Me.WebBrowserQueryResults)
         Me.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MinimumSize = New System.Drawing.Size(1100, 450)
+        Me.MinimumSize = New System.Drawing.Size(1185, 450)
         Me.Name = "SearchView"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

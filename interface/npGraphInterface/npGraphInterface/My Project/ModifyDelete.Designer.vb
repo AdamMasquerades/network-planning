@@ -39,11 +39,11 @@ Partial Class ModifyDelete
         'WebBrowserQueryResults
         '
         Me.WebBrowserQueryResults.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.WebBrowserQueryResults.Location = New System.Drawing.Point(0, 57)
+        Me.WebBrowserQueryResults.Location = New System.Drawing.Point(0, 43)
         Me.WebBrowserQueryResults.Margin = New System.Windows.Forms.Padding(0)
         Me.WebBrowserQueryResults.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowserQueryResults.Name = "WebBrowserQueryResults"
-        Me.WebBrowserQueryResults.Size = New System.Drawing.Size(941, 440)
+        Me.WebBrowserQueryResults.Size = New System.Drawing.Size(1232, 710)
         Me.WebBrowserQueryResults.TabIndex = 1
         '
         'ComboBoxFunction
@@ -66,7 +66,7 @@ Partial Class ModifyDelete
         Me.TextBoxAddName.ForeColor = System.Drawing.SystemColors.ScrollBar
         Me.TextBoxAddName.Location = New System.Drawing.Point(179, 6)
         Me.TextBoxAddName.Name = "TextBoxAddName"
-        Me.TextBoxAddName.Size = New System.Drawing.Size(202, 27)
+        Me.TextBoxAddName.Size = New System.Drawing.Size(255, 27)
         Me.TextBoxAddName.TabIndex = 3
         Me.TextBoxAddName.Text = " Name"
         Me.TextBoxAddName.Visible = False
@@ -76,7 +76,7 @@ Partial Class ModifyDelete
         Me.TextBoxAddDuration.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBoxAddDuration.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxAddDuration.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBoxAddDuration.Location = New System.Drawing.Point(387, 6)
+        Me.TextBoxAddDuration.Location = New System.Drawing.Point(439, 6)
         Me.TextBoxAddDuration.Name = "TextBoxAddDuration"
         Me.TextBoxAddDuration.Size = New System.Drawing.Size(105, 27)
         Me.TextBoxAddDuration.TabIndex = 4
@@ -88,19 +88,21 @@ Partial Class ModifyDelete
         Me.TextBoxAddPrereq.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBoxAddPrereq.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxAddPrereq.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBoxAddPrereq.Location = New System.Drawing.Point(498, 6)
+        Me.TextBoxAddPrereq.Location = New System.Drawing.Point(550, 6)
         Me.TextBoxAddPrereq.Name = "TextBoxAddPrereq"
-        Me.TextBoxAddPrereq.Size = New System.Drawing.Size(289, 27)
+        Me.TextBoxAddPrereq.Size = New System.Drawing.Size(492, 27)
         Me.TextBoxAddPrereq.TabIndex = 5
         Me.TextBoxAddPrereq.Text = " Prerequisite(s)"
         Me.TextBoxAddPrereq.Visible = False
         '
         'ButtonOK
         '
+        Me.ButtonOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ButtonOK.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray
         Me.ButtonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonOK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonOK.Location = New System.Drawing.Point(802, 6)
+        Me.ButtonOK.Location = New System.Drawing.Point(1134, 6)
+        Me.ButtonOK.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonOK.Name = "ButtonOK"
         Me.ButtonOK.Size = New System.Drawing.Size(87, 28)
         Me.ButtonOK.TabIndex = 6
@@ -128,7 +130,7 @@ Partial Class ModifyDelete
         Me.TextBoxID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.TextBoxID.Location = New System.Drawing.Point(217, 6)
         Me.TextBoxID.Name = "TextBoxID"
-        Me.TextBoxID.Size = New System.Drawing.Size(40, 27)
+        Me.TextBoxID.Size = New System.Drawing.Size(54, 27)
         Me.TextBoxID.TabIndex = 33
         Me.TextBoxID.Visible = False
         '
@@ -137,9 +139,9 @@ Partial Class ModifyDelete
         Me.TextBoxModifyName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBoxModifyName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxModifyName.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBoxModifyName.Location = New System.Drawing.Point(271, 6)
+        Me.TextBoxModifyName.Location = New System.Drawing.Point(277, 6)
         Me.TextBoxModifyName.Name = "TextBoxModifyName"
-        Me.TextBoxModifyName.Size = New System.Drawing.Size(110, 27)
+        Me.TextBoxModifyName.Size = New System.Drawing.Size(200, 27)
         Me.TextBoxModifyName.TabIndex = 34
         Me.TextBoxModifyName.Text = " Name"
         Me.TextBoxModifyName.Visible = False
@@ -149,7 +151,7 @@ Partial Class ModifyDelete
         Me.TextBoxModifyDuration.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBoxModifyDuration.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxModifyDuration.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBoxModifyDuration.Location = New System.Drawing.Point(387, 6)
+        Me.TextBoxModifyDuration.Location = New System.Drawing.Point(482, 6)
         Me.TextBoxModifyDuration.Name = "TextBoxModifyDuration"
         Me.TextBoxModifyDuration.Size = New System.Drawing.Size(105, 27)
         Me.TextBoxModifyDuration.TabIndex = 35
@@ -161,9 +163,9 @@ Partial Class ModifyDelete
         Me.TextBoxModifyPrereq.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBoxModifyPrereq.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxModifyPrereq.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBoxModifyPrereq.Location = New System.Drawing.Point(498, 6)
+        Me.TextBoxModifyPrereq.Location = New System.Drawing.Point(593, 6)
         Me.TextBoxModifyPrereq.Name = "TextBoxModifyPrereq"
-        Me.TextBoxModifyPrereq.Size = New System.Drawing.Size(289, 27)
+        Me.TextBoxModifyPrereq.Size = New System.Drawing.Size(449, 27)
         Me.TextBoxModifyPrereq.TabIndex = 36
         Me.TextBoxModifyPrereq.Text = " Prerequisite(s)"
         Me.TextBoxModifyPrereq.Visible = False
@@ -173,7 +175,7 @@ Partial Class ModifyDelete
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(941, 497)
+        Me.ClientSize = New System.Drawing.Size(1232, 753)
         Me.Controls.Add(Me.TextBoxModifyPrereq)
         Me.Controls.Add(Me.TextBoxModifyDuration)
         Me.Controls.Add(Me.TextBoxModifyName)
@@ -186,8 +188,7 @@ Partial Class ModifyDelete
         Me.Controls.Add(Me.ComboBoxFunction)
         Me.Controls.Add(Me.WebBrowserQueryResults)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(959, 544)
+        Me.MinimumSize = New System.Drawing.Size(1059, 450)
         Me.Name = "ModifyDelete"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

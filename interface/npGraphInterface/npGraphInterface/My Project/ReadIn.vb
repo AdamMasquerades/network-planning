@@ -116,20 +116,19 @@ Public Class ReadIn
 
     Private Sub ButtonSubmit_Click(sender As Object, e As EventArgs) Handles ButtonSubmit.Click
 
-        '读写.xlsx文件
-        'Dim xlfilename As String
+        'Dim xlfilename As String                                                 'read and write excel(.xlsx) files
         'xlfilename = Application.StartupPath + "\originalData.xlsx"
         'If System.IO.Directory.Exists(xlfilename) = False Then File.Delete(xlfilename)
-        'Dim xlapp As Excel.Application 'Excel对象
-        'Dim xlbook As Excel.Workbook '工作簿
-        'Dim xlsheet As Excel.Worksheet '工作表
+        'Dim xlapp As Excel.Application                                           'Excel object
+        'Dim xlbook As Excel.Workbook 
+        'Dim xlsheet As Excel.Worksheet
         'Dim i As Integer
         'Dim wm As New WaitMsg
-        'xlapp = CreateObject("Excel.Application") '创建EXCEL对象
-        'xlbook = xlapp.Workbooks.Add '新建EXCEL工件簿文件
-        'xlapp.Visible = False '设置EXCEL对象不可见
+        'xlapp = CreateObject("Excel.Application") 
+        'xlbook = xlapp.Workbooks.Add    
+        'xlapp.Visible = False     
         'wm.Show()
-        'xlsheet = xlbook.Worksheets(1) '设置活动工作表
+        'xlsheet = xlbook.Worksheets(1)                                           'active worksheet
         'For i = 1 To currentItemNumber
         '    xlsheet.Activate()
         '    xlsheet.Cells(i, 1) = itemId(i)
@@ -139,7 +138,7 @@ Public Class ReadIn
         'Next
         'xlsheet.SaveAs(xlfilename)
         'xlapp.Quit()
-        'xlapp = Nothing '释放xlApp对象
+        'xlapp = Nothing                                                          'release object
         'Me.Close()
 
         If currentItemNumber = 0 Then

@@ -34,83 +34,80 @@ Public Class SearchView
     End Sub
 
     Private Sub ComboBoxItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem.SelectedIndexChanged
-
-        If ComboBoxItem.SelectedItem = "<column>" Then
-            ComboBoxCondition.Items.Clear()
-            ComboBoxCondition.Items.Add("<condition>")
-            ComboBoxCondition.SelectedItem = "<condition>"
-            ComboBoxCondition.Enabled = False
-            TextBoxCondition.Enabled = False
-            ComboBoxOrderBy.SelectedItem = "<sort by>"
-            ButtonOrder.Text = "↑"
-            ComboBoxOrderBy.Enabled = False
-            ButtonOK.Enabled = False
-        End If
-        If ComboBoxItem.SelectedItem = "All" Then
-            ComboBoxCondition.Items.Clear()
-            ComboBoxCondition.Items.Add("<condition>")
-            ComboBoxCondition.SelectedItem = "<condition>"
-            ComboBoxCondition.Enabled = False
-            TextBoxCondition.Enabled = False
-            ComboBoxOrderBy.Enabled = True
-            ComboBoxOrderBy.SelectedItem = "<sort by>"
-            ButtonOrder.Text = "↑"
-            ButtonOK.Enabled = True
-        End If
-        If ComboBoxItem.SelectedItem = "ID" Then
-            ComboBoxCondition.Enabled = True
-            ComboBoxCondition.Items.Clear()
-            ComboBoxCondition.Items.Add("=")
-            ComboBoxCondition.Items.Add(">")
-            ComboBoxCondition.Items.Add(">=")
-            ComboBoxCondition.Items.Add("<")
-            ComboBoxCondition.Items.Add("<=")
-            ComboBoxCondition.SelectedItem = "="
-            TextBoxCondition.Enabled = True
-            ComboBoxOrderBy.Enabled = True
-            ComboBoxOrderBy.SelectedItem = "<sort by>"
-            ButtonOrder.Text = "↑"
-            If Trim(TextBoxCondition.Text) = "" Then ButtonOK.Enabled = False
-        End If
-        If ComboBoxItem.SelectedItem = "Name" Then
-            ComboBoxCondition.Enabled = True
-            ComboBoxCondition.Items.Clear()
-            ComboBoxCondition.Items.Add("equals")
-            ComboBoxCondition.Items.Add("contains")
-            ComboBoxCondition.SelectedItem = "equals"
-            TextBoxCondition.Enabled = True
-            ComboBoxOrderBy.Enabled = True
-            ComboBoxOrderBy.SelectedItem = "<sort by>"
-            ButtonOrder.Text = "↑"
-            If Trim(TextBoxCondition.Text) = "" Then ButtonOK.Enabled = False
-        End If
-        If ComboBoxItem.SelectedItem = "Duration" Then
-            ComboBoxCondition.Enabled = True
-            ComboBoxCondition.Items.Clear()
-            ComboBoxCondition.Items.Add("=")
-            ComboBoxCondition.Items.Add(">")
-            ComboBoxCondition.Items.Add(">=")
-            ComboBoxCondition.Items.Add("<")
-            ComboBoxCondition.Items.Add("<=")
-            ComboBoxCondition.SelectedItem = "="
-            TextBoxCondition.Enabled = True
-            ComboBoxOrderBy.Enabled = True
-            ComboBoxOrderBy.SelectedItem = "<sort by>"
-            ButtonOrder.Text = "↑"
-            If Trim(TextBoxCondition.Text) = "" Then ButtonOK.Enabled = False
-        End If
-        If ComboBoxItem.SelectedItem = "Prerequisite(s)" Then
-            ComboBoxCondition.Enabled = True
-            ComboBoxCondition.Items.Clear()
-            ComboBoxCondition.Items.Add("equal(s)")
-            ComboBoxCondition.Items.Add("contain(s)")
-            ComboBoxCondition.SelectedItem = "contain(s)"
-            TextBoxCondition.Enabled = True
-            ComboBoxOrderBy.Enabled = True
-            ComboBoxOrderBy.SelectedItem = "<sort by>"
-            ButtonOrder.Text = "↑"
-            If Trim(TextBoxCondition.Text) = "" Then ButtonOK.Enabled = False
-        End If
+        Select Case ComboBoxItem.SelectedItem
+            Case "<column>"
+                ComboBoxCondition.Items.Clear()
+                ComboBoxCondition.Items.Add("<condition>")
+                ComboBoxCondition.SelectedItem = "<condition>"
+                ComboBoxCondition.Enabled = False
+                TextBoxCondition.Enabled = False
+                ComboBoxOrderBy.SelectedItem = "<sort by>"
+                ButtonOrder.Text = "↑"
+                ComboBoxOrderBy.Enabled = False
+                ButtonOK.Enabled = False
+                TextBoxCondition.Text = ""
+            Case "All"
+                ComboBoxCondition.Items.Clear()
+                ComboBoxCondition.Items.Add("<condition>")
+                ComboBoxCondition.SelectedItem = "<condition>"
+                ComboBoxCondition.Enabled = False
+                TextBoxCondition.Enabled = False
+                ComboBoxOrderBy.Enabled = True
+                ComboBoxOrderBy.SelectedItem = "<sort by>"
+                ButtonOrder.Text = "↑"
+                ButtonOK.Enabled = True
+                TextBoxCondition.Text = ""
+            Case "ID"
+                ComboBoxCondition.Enabled = True
+                ComboBoxCondition.Items.Clear()
+                ComboBoxCondition.Items.Add("=")
+                ComboBoxCondition.Items.Add(">")
+                ComboBoxCondition.Items.Add(">=")
+                ComboBoxCondition.Items.Add("<")
+                ComboBoxCondition.Items.Add("<=")
+                ComboBoxCondition.SelectedItem = "="
+                TextBoxCondition.Enabled = True
+                ComboBoxOrderBy.Enabled = True
+                ComboBoxOrderBy.SelectedItem = "<sort by>"
+                ButtonOrder.Text = "↑"
+                TextBoxCondition.Text = ""
+            Case "Name"
+                ComboBoxCondition.Enabled = True
+                ComboBoxCondition.Items.Clear()
+                ComboBoxCondition.Items.Add("equals")
+                ComboBoxCondition.Items.Add("contains")
+                ComboBoxCondition.SelectedItem = "equals"
+                TextBoxCondition.Enabled = True
+                ComboBoxOrderBy.Enabled = True
+                ComboBoxOrderBy.SelectedItem = "<sort by>"
+                ButtonOrder.Text = "↑"
+                TextBoxCondition.Text = ""
+            Case "Duration"
+                ComboBoxCondition.Enabled = True
+                ComboBoxCondition.Items.Clear()
+                ComboBoxCondition.Items.Add("=")
+                ComboBoxCondition.Items.Add(">")
+                ComboBoxCondition.Items.Add(">=")
+                ComboBoxCondition.Items.Add("<")
+                ComboBoxCondition.Items.Add("<=")
+                ComboBoxCondition.SelectedItem = "="
+                TextBoxCondition.Enabled = True
+                ComboBoxOrderBy.Enabled = True
+                ComboBoxOrderBy.SelectedItem = "<sort by>"
+                ButtonOrder.Text = "↑"
+                TextBoxCondition.Text = ""
+            Case "Prerequisite(s)"
+                ComboBoxCondition.Enabled = True
+                ComboBoxCondition.Items.Clear()
+                ComboBoxCondition.Items.Add("equal(s)")
+                ComboBoxCondition.Items.Add("contain(s)")
+                ComboBoxCondition.SelectedItem = "contain(s)"
+                TextBoxCondition.Enabled = True
+                ComboBoxOrderBy.Enabled = True
+                ComboBoxOrderBy.SelectedItem = "<sort by>"
+                ButtonOrder.Text = "↑"
+                TextBoxCondition.Text = ""
+        End Select
     End Sub
 
     Private Sub TextBoxCondition_TextChanged(sender As Object, e As EventArgs) Handles TextBoxCondition.TextChanged

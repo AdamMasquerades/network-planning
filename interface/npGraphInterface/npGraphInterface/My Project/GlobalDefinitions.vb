@@ -56,8 +56,8 @@ Module GlobalDefinitions
             queryHtml.Write("<tr>" + vbCrLf)
             queryHtml.Write("<td>" + itemId(i) + "</td>" + vbCrLf)
             queryHtml.Write("<td>" + itemName(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + itemDuration(i).Replace(",", ", ") + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + itemPrereq(i) + "</td>" + vbCrLf)
+            queryHtml.Write("<td>" + itemDuration(i) + "</td>" + vbCrLf)
+            queryHtml.Write("<td>" + itemPrereq(i).Replace(",", ", ") + "</td>" + vbCrLf)
             queryHtml.Write("</tr>" + vbCrLf)
         Next
         If currentItemNumber = 0 Then
@@ -101,7 +101,7 @@ Module GlobalDefinitions
             queryHtml.Write("<td>" + queryId(i) + "</td>" + vbCrLf)
             queryHtml.Write("<td>" + queryName(i) + "</td>" + vbCrLf)
             queryHtml.Write("<td>" + queryDuration(i) + "</td>" + vbCrLf)
-            queryHtml.Write("<td>" + queryPrereq(i) + "</td>" + vbCrLf)
+            queryHtml.Write("<td>" + queryPrereq(i).Replace(",", ", ") + "</td>" + vbCrLf)
             queryHtml.Write("</tr>" + vbCrLf)
         Next
         If queryItemNumber = 0 Then
@@ -187,6 +187,13 @@ Module GlobalDefinitions
         If condition.Contains("(") Or condition.Contains(")") Or condition.Contains("{") Or condition.Contains("}") Then Return "Invalid query. It cannot contain parentheses('()') or braces('{}')." + vbCrLf + "Brackets('[]') are recommended."
         If condition = "START" Or condition = "END" Or condition = "Undefined" Then Return "Invalid query. It contains a reserved word."
         If condition = "exec" Or condition = "xp_cmdshell" Then Return "Invalid query. It contains a reserved word."
+        Try
+            For i = 0 To condition.Length - 1
+                If Asc(condition.Substring(i, 1)) > 255 Then Return "Invalid name. It contains characters that are unsupported."
+            Next
+        Catch
+            Return "Invalid name. It contains characters that are unsupported."
+        End Try
         Return "OK"
     End Function
 
@@ -204,6 +211,13 @@ Module GlobalDefinitions
                 If name = itemName(i) And i <> exceptionId Then Return "Invalid item name. A item with the same name already exists."
             Next
         End If
+        Try
+            For i = 0 To name.Length - 1
+                If Asc(name.Substring(i, 1)) > 255 Then Return "Invalid name. It contains characters that are unsupported."
+            Next
+        Catch
+            Return "Invalid name. It contains characters that are unsupported."
+        End Try
         Return "OK"
     End Function
 

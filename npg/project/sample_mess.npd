@@ -23,9 +23,9 @@
  23 T 8 B
  24 U 8 S,G
  25 V 4 RANDOM-NAME,T
- 26 now-i'm-feeling-scared 43 
- 27 let's-mess-it-up!!! 66 now-i'm-feeling-scared
- 28 W 13 V,E,L,P,Q,F,R,I,O,U,let's-mess-it-up!!!,ANALOGUE-CIRCUIT-ASSIGNMENTS-WILL-BE-DUE-TOMORROW
+ 26 now-i`m-feeling-scared 43 
+ 27 let`s-mess-it-up!!! 66 now-i`m-feeling-scared
+ 28 W 13 V,E,L,P,Q,F,R,I,O,U,let`s-mess-it-up!!!,ANALOGUE-CIRCUIT-ASSIGNMENTS-WILL-BE-DUE-TOMORROW
  29 testing-is-fun-and-dull 35 A,O,P,T,B,D
  30 THE-CRAZINESS-BEGINS 3 A
  31 X 32 THE-CRAZINESS-BEGINS,RANDOM-NAME,THIS-IS-A-LONG-LONG-NAME,L,S,B
@@ -36,11 +36,11 @@
  36 hanzi-are-too-advanced-for-this-phonetic-language. 49 Z,S,W
  37 KLINGON-incoming 10 J,N,Z
  38 qaStaHvIS 2 Q,A
- 39 wa' 2 qaStaHvIS,F
- 40 ram 19 wa',P,Q,W
+ 39 wa` 2 qaStaHvIS,F
+ 40 ram 19 wa`,P,Q,W
  41 loSSaD 15 X,no!-greek-letters-suck!,ram
  42 Hugh 26 loSSaD,KLINGON-incoming,Y
  43 SIjlaH 3 KLINGON-incoming,THE-CRAZINESS-BEGINS
  44 qetbogh 6 SIjlaH,P
  45 loD 9 qetbogh,U
- 46 almost-there.-hail-CHAOS! 3 wa',testing-is-fun-and-dull,qaStaHvIS,hanzi-are-too-advanced-for-this-phonetic-language.,Maybe-i-need-some-greek-letters.
+ 46 almost-there.-hail-CHAOS! 3 wa`,testing-is-fun-and-dull,qaStaHvIS,hanzi-are-too-advanced-for-this-phonetic-language.,Maybe-i-need-some-greek-letters.

@@ -128,7 +128,7 @@ Partial Class ModifyDelete
         Me.TextBoxID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.TextBoxID.Location = New System.Drawing.Point(217, 6)
         Me.TextBoxID.Name = "TextBoxID"
-        Me.TextBoxID.Size = New System.Drawing.Size(35, 27)
+        Me.TextBoxID.Size = New System.Drawing.Size(40, 27)
         Me.TextBoxID.TabIndex = 33
         Me.TextBoxID.Visible = False
         '

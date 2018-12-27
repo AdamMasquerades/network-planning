@@ -178,6 +178,7 @@ Public Class MainForm
                     If DurationCheck(itemDuration(currentItemNumber)) <> "OK" Then Throw New Exception
                     itemPrereq(currentItemNumber) = itemPrereq(currentItemNumber).Replace(",", ", ")
                     If PrerequisiteCheck(itemPrereq(currentItemNumber), currentItemNumber - 1) <> "OK" Then Throw New Exception
+                    itemPrereq(currentItemNumber) = itemPrereq(currentItemNumber).Replace(", ", ",")
                 End If
             End While
         Catch

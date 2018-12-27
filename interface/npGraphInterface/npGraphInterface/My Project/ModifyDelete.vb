@@ -87,6 +87,32 @@ Public Class ModifyDelete
         ButtonOK.Visible = False
     End Sub
 
+    Private Function DeleteIdCheck(id As String) As String
+        If id = "" Then Return "Invalid ID. It cannot be empty."
+        If IsNumeric(id) = False Or id.Contains(".") Or id.Contains(",") Then Return "Invalid ID. It must be an integer."
+        Dim idVal As Integer = Val(id)
+        If idVal <= 0 Then Return "Invalid ID. It must be an positive integer."
+        If idVal > currentItemNumber Then Return "ID out of range."
+
+        Dim postPrereqArray() As String
+        Dim postPrereqNumber As Integer
+        Dim j, k As Integer
+
+
+        For j = idVal + 1 To currentItemNumber
+            postPrereqArray = Split(itemPrereq(j), ",")         'note that the separator is ONLY A SINGLE comma.
+            postPrereqNumber = 1
+            For k = 0 To itemPrereq(j).Length - 1
+                If itemPrereq(j).Substring(k, 1) = "," Then postPrereqNumber = postPrereqNumber + 1
+            Next
+            For k = 0 To postPrereqNumber - 1
+                If itemName(idVal) = postPrereqArray(k) Then Return "This item cannot be deleted, because it serves as a prerequisite of another item (ID=" + Str(j) + ")."
+            Next
+        Next
+
+        Return "OK"
+    End Function
+
     Private Sub ModifyDelete_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WebBrowserQueryResults.Height = Me.Height - 70
         ComboBoxFunction.SelectedItem = "<none>"
@@ -230,14 +256,14 @@ Public Class ModifyDelete
                     Return
                 End If
 
-                NameRegularize(TextBoxAddName.Text)
-                checkResult = NameCheck(TextBoxAddName.Text, Val(TextBoxID.Text))
+                NameRegularize(TextBoxModifyName.Text)
+                checkResult = NameCheck(TextBoxModifyName.Text, Val(TextBoxID.Text))
                 If checkResult <> "OK" Then
                     MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
                 End If
 
-                checkResult = DurationCheck(TextBoxAddDuration.Text)
+                checkResult = DurationCheck(TextBoxModifyDuration.Text)
                 If checkResult <> "OK" Then
                     MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
@@ -271,11 +297,28 @@ Public Class ModifyDelete
                 LoadCurrentHtml(WebBrowserQueryResults)
 
             Case "Delete"
-                If Val(TextBoxID.Text) <> currentItemNumber Then
-                    'If IsNumeric(TextBoxID.Text) = False Or TextBoxID.Text.Contains(".") Or Val(TextBoxID.Text) > currentItemNumber Then
-                    MsgBox("Invalid ID", MsgBoxStyle.Exclamation, Title:="WARNING")
+
+                Dim checkResult As String
+                checkResult = DeleteIdCheck(TextBoxID.Text)
+                If checkResult <> "OK" Then
+                    MsgBox(checkResult, MsgBoxStyle.Exclamation, Title:="WARNING")
                     Return
                 End If
+
+                Dim idVal As Integer = Val(TextBoxID.Text)
+                Dim i As Integer
+
+                If idVal <> currentItemNumber Then
+                    For i = idVal To currentItemNumber - 1
+                        itemName(i) = itemName(i + 1)
+                        itemDuration(i) = itemDuration(i + 1)
+                        itemPrereq(i) = itemPrereq(i + 1)
+                    Next
+                End If
+
+                itemName(currentItemNumber) = ""
+                itemDuration(currentItemNumber) = ""
+                itemPrereq(currentItemNumber) = ""
 
                 currentItemNumber = currentItemNumber - 1
 

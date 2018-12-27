@@ -38,7 +38,7 @@ Public Class ReadIn
         itemDuration(currentItemNumber) = Trim(TextBoxDuration.Text)
         itemPrereq(currentItemNumber) = Trim(TextBoxPrereq.Text)
 
-        itemPrereq(currentItemNumber) = itemPrereq(currentItemNumber).Replace(", ", ",")
+        itemPrereq(currentItemNumber) = itemPrereq(currentItemNumber).Replace(", ", ",")   'need a better and clearer way to converge between display text and storage.
 
         LabelId5.Text = LabelId4.Text
         LabelId4.Text = LabelId3.Text
